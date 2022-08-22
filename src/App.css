@@ -1,38 +1,63 @@
-.App {
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.center {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.lavalampMenu.optionsMenu2 {
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  /*marker*/
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.lavalampMenu.optionsMenu2 button {
+  height: 45px;
+  padding: 0 20px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.lavalampMenu.optionsMenu2 button.selected {
   color: white;
+  font-weight: normal;
 }
 
-.App-link {
-  color: #61dafb;
+.lavalampMenu.optionsMenu2 .indicator {
+  background-color: #d92a1c;
+  border-radius: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.lavalampMenu.optionsMenu3 {
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  /*marker*/
 }
+
+.lavalampMenu.optionsMenu3 ul {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.lavalampMenu.optionsMenu3 button {
+  height: 45px;
+  padding: 0 20px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.lavalampMenu.optionsMenu3 button.selected {
+  color: #d92a1c;
+}
+
+.lavalampMenu.optionsMenu3 .indicator {
+  background-color: #d92a1c;
+  height: 6px;
+  top: auto;
+  bottom: -6px;
+}
+/*# sourceMappingURL=App.css.map */

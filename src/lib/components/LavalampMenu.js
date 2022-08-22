@@ -3,6 +3,16 @@ import './lavalampMenu.css';
 
 const LavalampMenu = (props) => {
 
+    const makeid=(length)=> {
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+           result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+     }
+
     const useWindowSize=()=> {
         const [size, setSize] = useState([0, 0]);
         useLayoutEffect(() => {
@@ -17,26 +27,27 @@ const LavalampMenu = (props) => {
     }
 
     const [clonedUl, setClonedUl] = useState(null); 
+    const [currentId, setCurrentId] = useState(); 
     const [indicatorStyles, setIndicatorStyles] = useState(null); 
     const [currentSelectedOption, setCurrentSelectedOption] = useState(null); 
     const [width, height] = useWindowSize();
 
     const selectInitialIndicator=()=>{
         if(currentSelectedOption===null){
-            let firstButton=document.querySelector('.lavalampMenu ul li button');
+            let firstButton=document.querySelector(`#${currentId}.lavalampMenu ul li button`);
             if(firstButton){
                 setIndicatorStyles({left:firstButton.offsetLeft + "px", width:firstButton.clientWidth + "px"});
                 clearAllAndSelectOne(firstButton);
             }
         } else {
-            let allButtons=document.querySelectorAll('.lavalampMenu ul li button');
+            let allButtons=document.querySelectorAll(`.lavalampMenu ul li button`);
             setIndicatorStyles({left:allButtons[currentSelectedOption].offsetLeft + "px", width:allButtons[currentSelectedOption].clientWidth + "px"});
             clearAllAndSelectOne(allButtons[currentSelectedOption]);
         }
     }
 
     const clearAllAndSelectOne=(selectedButton)=>{
-        document.querySelectorAll('.lavalampMenu ul li button').forEach((el) => {
+        document.querySelectorAll(`.lavalampMenu ul li button`).forEach((el) => {
             el.classList.remove('selected');
         });
         selectedButton.classList.add('selected');
@@ -47,6 +58,9 @@ const LavalampMenu = (props) => {
         let clonedLi=null;
         let clonedUll=null;
         let liArray=[];
+
+        //let localCurrentId=;
+        setCurrentId(makeid(10));
 
         let originalUl=props.children;
         if(originalUl.type==='ul'){
@@ -85,7 +99,7 @@ const LavalampMenu = (props) => {
     }, [clonedUl]);
 
     return (
-        <div className={props.className?'lavalampMenu'+' '+props.className:'lavalampMenu'}>  
+        <div id={currentId} className={props.className?'lavalampMenu'+' '+props.className:'lavalampMenu'}>  
             {clonedUl}
             <div className="indicator" style={indicatorStyles}></div>
         </div>

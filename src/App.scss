@@ -1,0 +1,53 @@
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
+.center{
+  text-align: center;
+}
+
+.lavalampMenu.optionsMenu2{
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+  button{
+    height:45px;
+    padding:0 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &.selected{color:white; font-weight: normal}
+  }
+  
+  /*marker*/
+  .indicator{
+    background-color:#d92a1c;
+    border-radius:50px
+  }
+}
+
+.lavalampMenu.optionsMenu3{
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;  
+
+  ul{border-bottom: 1px solid #d7d7d7;}
+
+  button{
+    height:45px;
+    padding:0 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &.selected{ color:#d92a1c}
+  }
+  
+  /*marker*/
+  .indicator{
+    background-color:#d92a1c;
+    height:6px;
+    top: auto;
+    bottom: -6px;
+  }
+}

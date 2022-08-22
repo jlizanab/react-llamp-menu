@@ -16,6 +16,18 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 const LavalampMenu = props => {
+  const makeid = length => {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+  };
+
   const useWindowSize = () => {
     const [size, setSize] = (0, _react.useState)([0, 0]);
     (0, _react.useLayoutEffect)(() => {
@@ -31,13 +43,15 @@ const LavalampMenu = props => {
   };
 
   const [clonedUl, setClonedUl] = (0, _react.useState)(null);
+  const [currentId, setCurrentId] = (0, _react.useState)();
   const [indicatorStyles, setIndicatorStyles] = (0, _react.useState)(null);
   const [currentSelectedOption, setCurrentSelectedOption] = (0, _react.useState)(null);
   const [width, height] = useWindowSize();
+  setCurrentId(makeid(10));
 
   const selectInitialIndicator = () => {
     if (currentSelectedOption === null) {
-      let firstButton = document.querySelector('.lavalampMenu ul li button');
+      let firstButton = document.querySelector(".lavalampMenu ul li button");
 
       if (firstButton) {
         setIndicatorStyles({
@@ -47,7 +61,7 @@ const LavalampMenu = props => {
         clearAllAndSelectOne(firstButton);
       }
     } else {
-      let allButtons = document.querySelectorAll('.lavalampMenu ul li button');
+      let allButtons = document.querySelectorAll(".lavalampMenu ul li button");
       setIndicatorStyles({
         left: allButtons[currentSelectedOption].offsetLeft + "px",
         width: allButtons[currentSelectedOption].clientWidth + "px"
@@ -57,7 +71,7 @@ const LavalampMenu = props => {
   };
 
   const clearAllAndSelectOne = selectedButton => {
-    document.querySelectorAll('.lavalampMenu ul li button').forEach(el => {
+    document.querySelectorAll(".lavalampMenu ul li button").forEach(el => {
       el.classList.remove('selected');
     });
     selectedButton.classList.add('selected');
@@ -67,7 +81,9 @@ const LavalampMenu = props => {
     let clonedButton = null;
     let clonedLi = null;
     let clonedUll = null;
-    let liArray = [];
+    let liArray = []; //let localCurrentId=;
+    //setCurrentId(localCurrentId);
+
     let originalUl = props.children;
 
     if (originalUl.type === 'ul') {
@@ -119,7 +135,7 @@ const LavalampMenu = props => {
   }, clonedUl, /*#__PURE__*/_react.default.createElement("div", {
     className: "indicator",
     style: indicatorStyles
-  }));
+  }, currentId));
 };
 
 var _default = LavalampMenu;

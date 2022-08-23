@@ -47,31 +47,30 @@ const LavalampMenu = props => {
   const [indicatorStyles, setIndicatorStyles] = (0, _react.useState)(null);
   const [currentSelectedOption, setCurrentSelectedOption] = (0, _react.useState)(null);
   const [width, height] = useWindowSize();
-  setCurrentId(makeid(10));
 
   const selectInitialIndicator = () => {
     if (currentSelectedOption === null) {
-      let firstButton = document.querySelector(".lavalampMenu ul li button");
+      let firstButton = document.querySelector("#ll".concat(currentId, ".lavalampMenu ul li button"));
 
       if (firstButton) {
         setIndicatorStyles({
           left: firstButton.offsetLeft + "px",
           width: firstButton.clientWidth + "px"
         });
-        clearAllAndSelectOne(firstButton);
+        clearAllAndSelectOne(firstButton, currentId);
       }
     } else {
-      let allButtons = document.querySelectorAll(".lavalampMenu ul li button");
+      let allButtons = document.querySelectorAll("#ll".concat(currentId, ".lavalampMenu ul li button"));
       setIndicatorStyles({
         left: allButtons[currentSelectedOption].offsetLeft + "px",
         width: allButtons[currentSelectedOption].clientWidth + "px"
       });
-      clearAllAndSelectOne(allButtons[currentSelectedOption]);
+      clearAllAndSelectOne(allButtons[currentSelectedOption], currentId);
     }
   };
 
-  const clearAllAndSelectOne = selectedButton => {
-    document.querySelectorAll(".lavalampMenu ul li button").forEach(el => {
+  const clearAllAndSelectOne = (selectedButton, cId) => {
+    document.querySelectorAll("#ll".concat(cId, ".lavalampMenu ul li button")).forEach(el => {
       el.classList.remove('selected');
     });
     selectedButton.classList.add('selected');
@@ -81,9 +80,9 @@ const LavalampMenu = props => {
     let clonedButton = null;
     let clonedLi = null;
     let clonedUll = null;
-    let liArray = []; //let localCurrentId=;
-    //setCurrentId(localCurrentId);
-
+    let liArray = [];
+    let cId = makeid(10);
+    setCurrentId(cId);
     let originalUl = props.children;
 
     if (originalUl.type === 'ul') {
@@ -95,16 +94,16 @@ const LavalampMenu = props => {
 
           if (buttonChildren) {
             const originalClick = e => {
-              if (buttonChildren.props.onClick) {
-                buttonChildren.props.onClick();
-              }
-
               setIndicatorStyles({
                 left: e.target.offsetLeft + "px",
                 width: e.target.clientWidth + "px"
               });
-              clearAllAndSelectOne(e.target);
+              clearAllAndSelectOne(e.target, cId);
               setCurrentSelectedOption(index);
+
+              if (buttonChildren.props.onClick) {
+                buttonChildren.props.onClick();
+              }
             };
 
             clonedButton = /*#__PURE__*/_react.default.cloneElement(buttonChildren, {
@@ -131,11 +130,12 @@ const LavalampMenu = props => {
     }
   }, [clonedUl]);
   return /*#__PURE__*/_react.default.createElement("div", {
+    id: "ll" + currentId,
     className: props.className ? 'lavalampMenu' + ' ' + props.className : 'lavalampMenu'
   }, clonedUl, /*#__PURE__*/_react.default.createElement("div", {
     className: "indicator",
     style: indicatorStyles
-  }, currentId));
+  }));
 };
 
 var _default = LavalampMenu;

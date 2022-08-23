@@ -8,9 +8,9 @@ function App() {
       <h3>Basic example (without extra css)</h3>
       <LavalampMenu className="optionsMenu">
         <ul>
-          <li><button onClick={()=>console.log('option 1')}>First option</button></li>
-          <li><button onClick={()=>console.log('option 2')}>Second option</button></li>
-          <li><button onClick={()=>console.log('option 3')}>Third option</button></li>
+          <li><button onClick={()=>console.log('option 1')}>One</button></li>
+          <li><button onClick={()=>console.log('option 2')}>Two</button></li>
+          <li><button onClick={()=>console.log('option 3')}>Three</button></li>
         </ul>
       </LavalampMenu>
 

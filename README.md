@@ -20,7 +20,7 @@ npm i react-llamp-menu
 1 . import
 
 ```js
-import LavalampMenu from 'react-llamp-menu';
+import {LavalampMenu} from 'react-llamp-menu';
 ```
 
 2 . Add a menu structure
@@ -60,6 +60,10 @@ import LavalampMenu from 'react-llamp-menu';
 }
 
 ```
+
+## Demo
+
+[https://react-llamp-menu-demo.netlify.app](https://react-llamp-menu-demo.netlify.app/)
 
 
 ## License

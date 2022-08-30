@@ -61,6 +61,18 @@ import {LavalampMenu} from 'react-llamp-menu';
 
 ```
 
+* . pre select another different option than the first
+
+```jsx
+<LavalampMenu className="optionsMenu">
+    <ul>
+      <li><button className="selected" onClick={()=>console.log('option 1')}>First option</button></li>
+      <li><button onClick={()=>console.log('option 2')}>Second option</button></li>
+      <li><button onClick={()=>console.log('option 3')}>Third option</button></li>
+    </ul>
+</LavalampMenu>
+```
+
 ## Demo
 
 [https://react-llamp-menu-demo.netlify.app](https://react-llamp-menu-demo.netlify.app/)

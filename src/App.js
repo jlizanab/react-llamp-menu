@@ -30,7 +30,7 @@ function App() {
         <ul>
           <li><button onClick={()=>console.log('option 1')}>First option</button></li>
           <li><button onClick={()=>console.log('option 2')}>Second option</button></li>
-          <li><button onClick={()=>console.log('option 3')}>Third option</button></li>
+          <li><button className="selected" onClick={()=>console.log('option 3')}>Third option</button></li>
         </ul>
       </LavalampMenu>
     </div>

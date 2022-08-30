@@ -30,14 +30,20 @@ const LavalampMenu = (props) => {
     const [currentId, setCurrentId] = useState(); 
     const [indicatorStyles, setIndicatorStyles] = useState(null); 
     const [currentSelectedOption, setCurrentSelectedOption] = useState(null); 
+    const [preSelectedOption, setPreSelectedOption] = useState(null); 
     const [width, height] = useWindowSize();
 
     const selectInitialIndicator=()=>{
         if(currentSelectedOption===null){
-            let firstButton=document.querySelector(`#ll${currentId}.lavalampMenu ul li button`);
-            if(firstButton){
-                setIndicatorStyles({left:firstButton.offsetLeft + "px", width:firstButton.clientWidth + "px"});
-                clearAllAndSelectOne(firstButton, currentId);
+            if(preSelectedOption){
+                let allButtons=document.querySelectorAll(`#ll${currentId}.lavalampMenu ul li button`);
+                setIndicatorStyles({left:allButtons[preSelectedOption].offsetLeft + "px", width:allButtons[preSelectedOption].clientWidth + "px"});
+            } else {
+                let firstButton=document.querySelector(`#ll${currentId}.lavalampMenu ul li button`);
+                if(firstButton){
+                    setIndicatorStyles({left:firstButton.offsetLeft + "px", width:firstButton.clientWidth + "px"});
+                    clearAllAndSelectOne(firstButton, currentId);
+                }
             }
         } else {
             let allButtons=document.querySelectorAll(`#ll${currentId}.lavalampMenu ul li button`);
@@ -80,6 +86,9 @@ const LavalampMenu = (props) => {
                             }
                         }
                         clonedButton=React.cloneElement(buttonChildren, {onClick:originalClick});
+                        if(clonedButton.props.className==='selected'){
+                            setPreSelectedOption(index);
+                        }
                     }
 
                     clonedLi=React.cloneElement(element, {key:`li${index}`},clonedButton);
@@ -96,11 +105,11 @@ const LavalampMenu = (props) => {
 
     useEffect(() => {
         if(clonedUl){
-            selectInitialIndicator();
+            setTimeout(function() {selectInitialIndicator()}, 500); 
         }
     }, [clonedUl]);
 
-    
+     
     return (
         <div id={"ll"+currentId} className={props.className?'lavalampMenu'+' '+props.className:'lavalampMenu'}>  
             {clonedUl}
